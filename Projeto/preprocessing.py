@@ -43,15 +43,23 @@ def remover_artefatos(imagem):
 
 
 # Diretório que contém as imagens
-diretorio = "\\img"
-root = os.path.join(os.getcwd() + "\\Projeto")
+diretorio = "img"
+try:
+    # Listar todos os arquivos no diretório das imagens
+    for nome_arquivo in os.listdir(diretorio):
+        caminho_arquivo = os.path.join(diretorio, nome_arquivo)
+        # Agora você tem o caminho completo para cada arquivo de imagem
+        print(caminho_arquivo)  # Isto é apenas para teste, para mostrar o caminho do arquivo
+        # Aqui você processaria o arquivo
+except FileNotFoundError:
+    print(f"Não foi possível encontrar o diretório: {diretorio}")
 
 # Lista para armazenar as imagens
 imagens = []
 
 # Percorra todos os arquivos na pasta
-for nome_arquivo in os.listdir(root + diretorio):
-    caminho_completo = os.path.join(root + diretorio, nome_arquivo)
+for nome_arquivo in os.listdir( diretorio):
+    caminho_completo = os.path.join( diretorio, nome_arquivo)
     if nome_arquivo.endswith(('.jpg', '.jpeg', '.png', '.gif')):
         try:
             imagem = cv2.imread(caminho_completo)
@@ -81,7 +89,7 @@ for nome_arquivo in os.listdir(root + diretorio):
             print(f"Erro ao abrir a imagem {caminho_completo}: {str(e)}")
 
 # salvar as imagens processadas
-novo_diretorio = root + "\\img_processada"
+novo_diretorio = "\\img_processada"
 
 if not os.path.exists(novo_diretorio):
     os.makedirs(novo_diretorio)
@@ -91,4 +99,3 @@ for img in imagens:
     caminho_imagem = os.path.join(novo_diretorio, 'imagem_processada_' + str(i) + '.jpg')
     cv2.imwrite(caminho_imagem, img)
     i += 1
-

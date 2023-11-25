@@ -6,7 +6,7 @@ from PIL import Image
 import math
 
 # Diretório que contém as imagens
-diretorio = "img/"
+diretorio = "Img"
 diretorio_saida = "img_processada"
 
 # Lista para armazenar as imagens
@@ -24,19 +24,7 @@ for nome_arquivo in os.listdir(diretorio):
         except Exception as e:
             print(f"Erro ao abrir a imagem {caminho_completo}: {str(e)}")
 
-# função de conversão de cor
-def convert_to_gray(image, luma=False):
-    image_array = np.array(image)  # Converte a imagem em uma matriz NumPy
-    if luma:
-        params = [0.299, 0.589, 0.114]
-    else:
-        params = [0.2125, 0.7154, 0.0721]    
-    gray_image = np.ceil(np.dot(image_array[...,:3], params))
- 
-    # Saturando os valores em 255
-    gray_image[gray_image > 255] = 255
-    
-    return gray_image
+
 
 def instantiate_histogram():    
     hist_array= []
@@ -115,7 +103,7 @@ for imagem in imagens:
     nova_imagem = imagem.resize((3560, 3269))
 
     # Converte a imagem para tons de cinza usando a função
-    image_cinza = convert_to_gray(nova_imagem)
+    #image_cinza = convert_to_gray(nova_imagem)
 
     histogram = instantiate_histogram()
     

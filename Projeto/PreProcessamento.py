@@ -3,8 +3,19 @@ from PIL import Image
 from PIL import ImageFilter
 import numpy as np
 
-# Diretório que contém as imagens
-diretorio = "Img/"
+
+# Caminho absoluto para o diretório que contém as imagens
+diretorio = r".\Projeto\Img"
+diretorio_saida = r".\Projeto\img_processada"
+
+# Verifique se o diretório existe antes de prosseguir
+if not os.path.isdir(diretorio):
+    raise Exception(f"O diretório especificado não foi encontrado: {diretorio}")
+
+# Percorra todos os arquivos na pasta
+for nome_arquivo in os.listdir(diretorio):
+    caminho_completo = os.path.join(diretorio, nome_arquivo)
+    # ... processamento adicional ...
 
 # Lista para armazenar as imagens
 imagens = []
@@ -26,7 +37,7 @@ cont = 0
 for imagem in imagens:
     cont = cont + 1
     #Redimensiona Imagem
-    nova_imagem = imagem.resize((224, 224))
+    nova_imagem = imagem.resize((640, 640))
     #Transforma RGB
     imagem_rgb = nova_imagem.convert("RGB")
     #Suaviza para eliminar ruído
